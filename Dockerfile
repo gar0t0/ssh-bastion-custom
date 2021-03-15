@@ -1,6 +1,6 @@
-FROM frolvlad/alpine-glibc AS build
+FROM alpine AS build
 
-LABEL version="0.1"
+LABEL version="0.2"
 LABEL maintainer="Tiago Machado <gar0t0@gmail.com>"
 
 RUN apk update \
@@ -8,7 +8,8 @@ RUN apk update \
         openssh-client \
         git \
         curl \
-        nmap
+        nmap \
+        gcompat
 
 COPY utils/build.sh /tmp/
 RUN chmod +x /tmp/build.sh && /tmp/build.sh

@@ -39,7 +39,7 @@ mkdir -p $TMPDIR
 
 ## Download OpenShift oc and verify md5
 printf "\033[0;32mDownload oc binary\n"
-curl -L $OC_PACKAGE --output $TMPDIR/$OC_PACKAGE_NAME.tar.gz
+curl -sL $OC_PACKAGE --output $TMPDIR/$OC_PACKAGE_NAME.tar.gz
 
 ## Install oc
 tar -xf $TMPDIR/$OC_PACKAGE_NAME.tar.gz -C $TMPDIR
@@ -47,12 +47,13 @@ install -o root -g root -m 0755 $TMPDIR/oc /usr/local/bin/oc
 printf "\033[0;32moc Install completed\n"
 
 
-######################
-## Download kubectl ##kubectl.sha256
-######################
+#############################
+## Download kubectl        ##
+## Download kubectl.sha256 ##
+#############################
 printf "\033[0;32mDownload kubectl binary\n"
-curl -L $KUBECTL_PACKAGE --output $TMPDIR/$KUBECTL_PACKAGE_NAME
-curl -L $KUBECTL_PACKAGE_CHECKSUM --output $TMPDIR/$KUBECTL_PACKAGE_CHECKSUM_NAME
+curl -sL $KUBECTL_PACKAGE --output $TMPDIR/$KUBECTL_PACKAGE_NAME
+curl -sL $KUBECTL_PACKAGE_CHECKSUM --output $TMPDIR/$KUBECTL_PACKAGE_CHECKSUM_NAME
 
 #####################
 ## Install kubectl ##
@@ -69,10 +70,12 @@ else
    exit 0
 fi
 
-## Download kubectx
+######################
+## Download kubectx ##
+######################
 printf "\033[0;32mDownload kubectx binary\n"
-curl -L $KUBECTX_PACKAGE --output $TMPDIR/$KUBECTX_PACKAGE_NAME.tar.gz
-curl -L $KUBECTX_PACKAGE_CHECKSUM --output $TMPDIR/$KUBECTX_PACKAGE_CHECKSUM_NAME
+curl -sL $KUBECTX_PACKAGE --output $TMPDIR/$KUBECTX_PACKAGE_NAME.tar.gz
+curl -sL $KUBECTX_PACKAGE_CHECKSUM --output $TMPDIR/$KUBECTX_PACKAGE_CHECKSUM_NAME
 
 #####################
 ## Install kubectx ##
@@ -90,18 +93,16 @@ else
    exit 0
 fi
 
-
-## Download kubens
-#curl  --output $TMPDIR/kubens.tar.gz
-
-## Download kubectx
+#####################
+## Download kubens ##
+#####################
 printf "\033[0;32mDownload kubens binary\n"
-curl -L $KUBENS_PACKAGE --output $TMPDIR/$KUBENS_PACKAGE_NAME.tar.gz
-curl -L $KUBENS_PACKAGE_CHECKSUM --output $TMPDIR/$KUBENS_PACKAGE_CHECKSUM_NAME
+curl -sL $KUBENS_PACKAGE --output $TMPDIR/$KUBENS_PACKAGE_NAME.tar.gz
+curl -sL $KUBENS_PACKAGE_CHECKSUM --output $TMPDIR/$KUBENS_PACKAGE_CHECKSUM_NAME
 
-#####################
+####################
 ## Install kubens ##
-#####################
+####################
 KUBENS_CHECKSUM="$(sha256sum $TMPDIR/$KUBENS_PACKAGE_NAME.tar.gz | awk '{ print $1}')"
 KUBENS_VERIFY="$(grep $KUBENS_CHECKSUM $TMPDIR/$KUBENS_PACKAGE_CHECKSUM_NAME)"
 if [ $? -eq 0 ]
@@ -115,5 +116,8 @@ else
    exit 0
 fi
 
-## Remove $TMPDIR
+####################
+## Remove $TMPDIR ##
+####################
 rm -rf $TMPDIR
+printf "\033[0;32m**Instalation** **Completed\n"
