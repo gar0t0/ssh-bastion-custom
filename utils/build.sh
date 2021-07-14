@@ -7,7 +7,7 @@
 TMPDIR="/tmp/utils"
 
 ## Variables oc
-OC_PACKAGE="https://mirror.openshift.com/pub/openshift-v3/clients/3.11.400-1/linux/oc.tar.gz"
+OC_PACKAGE="https://mirror.openshift.com/pub/openshift-v4/x86_64/clients/ocp/stable/openshift-client-linux.tar.gz"
 OC_PACKAGE_NAME="$(echo $OC_PACKAGE | awk -F '/' '{ sub(".tar.gz",""); print $9 }')"
 
 ## Variables kubectl

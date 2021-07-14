@@ -3,7 +3,7 @@
 * git
 * curl
 * nmap
-* Openshift CLI - 3.11
+* Openshift CLI - 4 stable
 * kubectl
 * kubens
 * kubectx
